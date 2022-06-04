@@ -1,6 +1,11 @@
 const routes = [
+    {
+        path: '',
+        component: () => import('../Pages/Store.vue'),
+        name: 'store'
+    },
   {
-    path: '',
+    path: 'home',
     component: () => import('../Pages/Home.vue'),
     name: 'home'
   },

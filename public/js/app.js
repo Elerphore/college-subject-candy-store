@@ -2031,15 +2031,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'app',
-  components: {
-    Navbar: function Navbar() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./Components/Navbar.vue */ "./resources/js/Components/Navbar.vue"));
-    }
-  }
+  name: 'app'
 });
 
 /***/ }),
@@ -20307,12 +20301,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "app" },
-    [_c("Navbar"), _vm._v(" "), _c("router-view")],
-    1
-  )
+  return _c("div", { staticClass: "app" }, [_c("router-view")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -36940,13 +36929,13 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [{
   path: '',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../Pages/Home.vue */ "./resources/js/Pages/Home.vue"));
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../Pages/Home.vue */ "./resources/js/Pages/Home.vue"));
   },
   name: 'home'
 }, {
   path: 'about',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../Pages/About.vue */ "./resources/js/Pages/About.vue"));
+    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../Pages/About.vue */ "./resources/js/Pages/About.vue"));
   },
   name: 'about'
 }];
@@ -37087,8 +37076,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kratOS/Projects/OPENSOURCE/laravel-vue-minimal/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kratOS/Projects/OPENSOURCE/laravel-vue-minimal/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /home/eler/laravel-vue-minimal/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/eler/laravel-vue-minimal/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })
