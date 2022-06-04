@@ -7,6 +7,9 @@ import router from './Router/index'
 import store from './Store/index';
 import App from './App.vue'
 
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.js'
+
 Vue.use(VueRouter)
 
 const app = new Vue({
