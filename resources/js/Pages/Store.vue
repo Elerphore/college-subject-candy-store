@@ -1,8 +1,6 @@
 <template>
     <div class="store">
-        <nav-bar class="mb-2"></nav-bar>
         <products-list class="container"></products-list>
-        <div>{{ isAuthorized }}</div>
         <window-footer></window-footer>
     </div>
 </template>
@@ -19,7 +17,8 @@ export default {
     components: {NavBar, WindowFooter, ProductsList},
     computed: {
         ...mapState({
-            isAuthorized: state => state.isAuthorized
+            isAuthorized: state => state.isAuthorized,
+            apiKey: state => state.apiKey
         }),
     }
 

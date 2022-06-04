@@ -42,7 +42,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
                         <div class="form-group">
                             <label>Логин</label>
                             <input v-model="user.login" type="text" class="form-control">
@@ -62,7 +61,6 @@
                         <div class="d-grid gap-2">
                             <button @click="tryToAuthorize()" class="btn btn-primary" type="button">{{ title }}</button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -99,15 +97,17 @@ export default {
       }
     },
     methods: {
-        tryToAuthorize() {
-            let route = this.isLogin ? 'login' : 'registration'
-            axios.post(`api/${route}`, {
+        async tryToAuthorize() {
+            let route = this.isLogin ? 'login' : 'registration';
+            await axios.post(`api/${route}`, {
                 login: this.user.login,
                 email: this.user.email,
                 password: this.user.password
             }).then(resp => {
-                localStorage.setItem("api_token", resp.access_token)
+                localStorage.setItem("api_token", resp.data.access_token)
                 this.$store.commit('ASSIGN');
+            }).catch((err) => {
+                console.log(err)
             })
         }
     }

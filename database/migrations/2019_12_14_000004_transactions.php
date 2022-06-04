@@ -28,6 +28,7 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->date('created_at')->nullable();
+            $table->enum('status', ['INCOMPLETED', 'COMPLETED']);
         });
     }
 

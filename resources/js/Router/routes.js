@@ -4,16 +4,21 @@ const routes = [
         component: () => import('../Pages/Store.vue'),
         name: 'store'
     },
-  {
-    path: 'home',
-    component: () => import('../Pages/Home.vue'),
-    name: 'home'
-  },
-  {
-    path: 'about',
-    component: () => import('../Pages/About.vue'),
-    name: 'about'
-  },
+    {
+        path: '/bin',
+        component: () => import('../Pages/Bin.vue'),
+        name: 'bin'
+    },
+    {
+        path: '/admin',
+        component: () => import('../Pages/AdminPanel.vue'),
+        name: 'adminPanel'
+    },
+    {
+        path: '/account',
+        component: () => import('../Pages/Account.vue'),
+        name: 'account'
+    }
 ]
 
 export default routes;
