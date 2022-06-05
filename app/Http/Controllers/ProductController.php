@@ -28,4 +28,18 @@ class ProductController extends Controller
 
         $transaction->save();
     }
+
+    function deleteProduct(Request $request) {
+        Product::destroy($request->id);
+    }
+
+    function updateProduct(Request $request) {
+        $product = Product::where('id', $request->id)->first();
+
+        $product->name = $request->name;
+        $product->amount = $request->amount;
+        $product->image = $request->image;
+        $product->save();
+
+    }
 }

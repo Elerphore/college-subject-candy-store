@@ -34,4 +34,8 @@ class TransactionController extends Controller
             'message' => 'ok'
         ]);
     }
+
+    function deleteTransaction(Request $request) {
+        Transaction::destroy($request->id);
+    }
 }

@@ -37,3 +37,15 @@ Route::middleware('auth:sanctum')->get('/transactions', [TransactionController::
 Route::middleware('auth:sanctum')->post('/transactions', [TransactionController::class, 'orderFinished']);
 
 Route::middleware('auth:sanctum')->get('/users', [UserController::class, 'getUsers']);
+
+Route::middleware('auth:sanctum')->delete('/user', [UserController::class, 'deleteUser']);
+
+Route::middleware('auth:sanctum')->delete('/product', [ProductController::class, 'deleteProduct']);
+
+Route::middleware('auth:sanctum')->delete('/transaction', [TransactionController::class, 'deleteTransaction']);
+
+Route::middleware('auth:sanctum')->patch('/user', [UserController::class, 'updateUser']);
+
+Route::middleware('auth:sanctum')->patch('/product', [ProductController::class, 'updateProduct']);
+
+Route::middleware('auth:sanctum')->patch('/transaction', [TransactionController::class, 'updateTransaction']);

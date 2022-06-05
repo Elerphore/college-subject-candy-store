@@ -1,5 +1,6 @@
 <template>
     <div class="adminPanel">
+        <h1>Продукты</h1>
         <table class="table table-bordered mb-5">
             <thead>
             <tr>
@@ -12,17 +13,18 @@
             <tbody v-for="(item, index) in products" :key="index">
             <tr>
                 <th scope="row">{{ index }}</th>
-                <td>{{ item.name }}</td>
-                <td>{{ item.amount }}</td>
-                <td>{{ item.image }}</td>
+                <td><input type="text" v-model="item.name"></td>
+                <td><input type="text" v-model="item.amount"></td>
+                <td><input type="text" v-model="item.image"></td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-primary">Сохранить изменения</button>
-                    <button type="button" class="btn btn-sm btn-danger">Удалить</button>
+                    <button @click="updateItem(item, 'product')" type="button" class="btn btn-sm btn-primary">Сохранить изменения</button>
+                    <button @click="deleteItem(item.id, 'product')" type="button" class="btn btn-sm btn-danger">Удалить</button>
                 </td>
             </tr>
             </tbody>
         </table>
 
+        <h1>Пользователи</h1>
         <table class="table table-bordered mb-5">
             <thead>
             <tr>
@@ -35,17 +37,18 @@
             <tbody v-for="(item, index) in users" :key="index">
             <tr>
                 <th scope="row">{{ index }}</th>
-                <td>{{ item.login }}</td>
-                <td>{{ item.email }}</td>
-                <td>{{ item.password }}</td>
+                <td><input type="text" v-model="item.login"></td>
+                <td><input type="text" v-model="item.email"></td>
+                <td><input type="text" v-model="item.password"></td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-primary">Сохранить изменения</button>
-                    <button type="button" class="btn btn-sm btn-danger">Удалить</button>
+                    <button @click="updateItem(item, 'user')" type="button" class="btn btn-sm btn-primary">Сохранить изменения</button>
+                    <button @click="deleteItem(item.id, 'user')" type="button" class="btn btn-sm btn-danger">Удалить</button>
                 </td>
             </tr>
             </tbody>
         </table>
 
+        <h1>Транзакции</h1>
         <table class="table table-bordered mb-5">
             <thead>
             <tr>
@@ -65,7 +68,7 @@
                 <td>{{ item.created_at }}</td>
                 <td>
                     <button type="button" class="btn btn-sm btn-primary">Сохранить изменения</button>
-                    <button type="button" class="btn btn-sm btn-danger">Удалить</button>
+                    <button @click="deleteItem(item.id, 'transaction')" type="button" class="btn btn-sm btn-danger">Удалить</button>
                 </td>
             </tr>
             </tbody>
@@ -108,16 +111,44 @@ export default {
         this.users = await this.users.data.users;
     },
     methods: {
-        delete(id, type) {
+        deleteItem(id, type) {
             switch (type) {
                 case 'transaction':
-                    axios.get('/api/products', { headers: {Authorization: `Bearer ${this.apiKey}`}})
+                    axios.delete('/api/transaction', { headers: {Authorization: `Bearer ${this.apiKey}`}, params: { id: id }})
                     break;
                 case 'user':
-                    axios.get('/api/products', { headers: {Authorization: `Bearer ${this.apiKey}`}})
+                    axios.delete('/api/user', { headers: {Authorization: `Bearer ${this.apiKey}`}, params: { id: id }})
                     break;
                 case 'product':
-                    axios.get('/api/products', { headers: {Authorization: `Bearer ${this.apiKey}`}})
+                    axios.delete('/api/product', { headers: {Authorization: `Bearer ${this.apiKey}`}, params: { id: id }})
+                    break;
+            }
+        },
+        updateItem(item, type) {
+            console.error(item)
+            switch (type) {
+                case 'transaction':
+                    axios.patch('/api/transaction',
+                        {},
+                        { headers: {Authorization: `Bearer ${this.apiKey}`}})
+                    break;
+                case 'user':
+                    axios.patch('/api/user',
+                        {id: item.id, login: item.login, email: item.email, password: item.password},
+                        { headers: {Authorization: `Bearer ${this.apiKey}`}})
+                    break;
+                case 'product':
+                    axios.patch('/api/product',
+                        {
+                            id: item.id,
+                            name: item.name,
+                            amount: item.amount,
+                            image: item.image,
+                        },
+                        { headers: {Authorization: `Bearer ${this.apiKey}`}})
+                        .catch((e) => {
+                            console.error(e)
+                        })
                     break;
             }
         }

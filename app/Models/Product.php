@@ -9,11 +9,11 @@ use Illuminate\Notifications\Notifiable;
 class Product extends Model
 {
     use HasFactory, Notifiable;
+    public $timestamps = false;
 
     protected $fillable = [
         'name',
         'amount',
-        'image',
-        'status',
+        'image'
     ];
 }
