@@ -24,6 +24,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -42,15 +60,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this = this;
 
     console.log(this.apiKey);
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/products', {
-      type: 'COMPLETED'
-    }, {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/transactions', {
+      params: {
+        type: 'COMPLETED'
+      },
       headers: {
         Authorization: "Bearer ".concat(this.apiKey)
       }
     }).then(function (resp) {
       console.log(_this.products);
-      _this.products = resp.data;
+      _this.products = resp.data.transactions;
     })["catch"](function (e) {
       console.error(e);
     });
@@ -75,10 +94,50 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "account" }, [
-    _c("h1", [_vm._v(_vm._s(_vm.products))])
+    _c("h1", [_vm._v("Свершённые транзакции")]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.products, function(item, index) {
+          return _c("tbody", { key: index }, [
+            _c("tr", [
+              _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(index))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.amount))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.created_at))])
+            ])
+          ])
+        })
+      ],
+      2
+    )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Название")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Цена")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Дата")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

@@ -24,13 +24,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "bin",
   data: function data() {
     return {
-      products: []
+      products: [],
+      selected: []
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
@@ -42,18 +67,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this = this;
 
     console.log(this.apiKey);
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/products', {
-      type: 'INCOMPLETED'
-    }, {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/transactions', {
       headers: {
         Authorization: "Bearer ".concat(this.apiKey)
+      },
+      params: {
+        type: 'INCOMPLETED'
       }
     }).then(function (resp) {
       console.log(_this.products);
-      _this.products = resp.data;
+      _this.products = resp.data.transactions;
+      _this.selected = resp.data.transactions.map(function (item) {
+        return item.id;
+      });
     })["catch"](function (e) {
       console.error(e);
     });
+  },
+  methods: {
+    transaction: function transaction() {
+      var _this2 = this;
+
+      this.products = this.products.filter(function (item) {
+        !_this2.selected.includes(item.id);
+      });
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/transactions', {
+        transactions: this.selected
+      }, {
+        headers: {
+          Authorization: "Bearer ".concat(this.apiKey)
+        }
+      }).then(function () {
+        window.open("/check.pdf");
+
+        _this2.$router.push('/');
+      });
+    }
   }
 });
 
@@ -75,10 +124,121 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "bin" }, [
-    _c("h1", [_vm._v(_vm._s(_vm.products))])
+    _c("h1", [_vm._v("Козрина")]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.products, function(item, index) {
+          return _c("tbody", { key: index }, [
+            _c("tr", [
+              _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(index))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.amount))]),
+              _vm._v(" "),
+              _c("td", [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selected,
+                      expression: "selected"
+                    }
+                  ],
+                  staticClass: "btn-check",
+                  attrs: {
+                    type: "checkbox",
+                    id: "btncheck_" + index,
+                    autocomplete: "off"
+                  },
+                  domProps: {
+                    value: item.id,
+                    checked: Array.isArray(_vm.selected)
+                      ? _vm._i(_vm.selected, item.id) > -1
+                      : _vm.selected
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.selected,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = item.id,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.selected = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.selected = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.selected = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "btn btn-outline-primary",
+                    attrs: { for: "btncheck_" + index }
+                  },
+                  [_vm._v("Выбрать")]
+                )
+              ])
+            ])
+          ])
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _vm.products.length > 0
+      ? _c("div", { staticClass: "gap-2 mx-auto" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.transaction()
+                }
+              }
+            },
+            [_vm._v("Оформить заказ")]
+          )
+        ])
+      : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Название")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Цена")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Выбрать")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
