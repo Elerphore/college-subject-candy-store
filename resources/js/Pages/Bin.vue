@@ -66,7 +66,10 @@ export default {
                 !this.selected.includes(item.id)
             })
 
-            axios.post('/api/transactions', {transactions: this.selected}, { headers: { Authorization: `Bearer ${this.apiKey}` } })
+            axios.post('/api/transactions', {transactions: this.selected}, { headers: { responseType: 'blob', Authorization: `Bearer ${this.apiKey}` } })
+                .then((response) => {
+                    window.open("/check.pdf")
+                })
         }
     }
 

@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Transaction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class ProductController extends Controller
 {
@@ -19,6 +20,7 @@ class ProductController extends Controller
 
     function createTransaction(Request $request) {
         $user =  $request->user();
+
         $transaction = new Transaction();
 
         $transaction->user_id = $user->id;
