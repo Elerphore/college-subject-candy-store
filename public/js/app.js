@@ -5447,6 +5447,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -29839,14 +29850,77 @@ var render = function() {
             attrs: { id: "navbarSupportedContent" }
           },
           [
-            _c(
-              "router-link",
-              {
-                staticClass: "btn btn-outline-success me-2",
-                attrs: { to: "/", tag: "button" }
-              },
-              [_vm._v("Главная")]
-            ),
+            _c("ul", { staticClass: "navbar-nav me-auto mb-2 mb-lg-0" }, [
+              _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-outline-success me-2",
+                      attrs: { to: "/", tag: "button" }
+                    },
+                    [_vm._v("Главная")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _vm.isAuthorized
+                    ? _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-outline-success me-2",
+                          attrs: { to: "/admin", tag: "button" }
+                        },
+                        [_vm._v("Админ панель")]
+                      )
+                    : _vm._e()
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _vm.isAuthorized
+                    ? _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-outline-success me-2",
+                          attrs: { to: "/account", tag: "button" }
+                        },
+                        [_vm._v("Кабинет")]
+                      )
+                    : _vm._e()
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _vm.isAuthorized
+                    ? _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-outline-success me-2",
+                          attrs: { to: "/bin", tag: "button" }
+                        },
+                        [_vm._v("Корзина")]
+                      )
+                    : _vm._e()
+                ],
+                1
+              )
+            ]),
             _vm._v(" "),
             !_vm.isAuthorized
               ? _c(
@@ -29888,53 +29962,19 @@ var render = function() {
             _vm._v(" "),
             _vm.isAuthorized
               ? _c(
-                  "router-link",
-                  {
-                    staticClass: "btn btn-outline-success me-2",
-                    attrs: { to: "/admin", tag: "button" }
-                  },
-                  [_vm._v("Админ панель")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.isAuthorized
-              ? _c(
-                  "router-link",
-                  {
-                    staticClass: "btn btn-outline-success me-2",
-                    attrs: { to: "/account", tag: "button" }
-                  },
-                  [_vm._v("Кабинет")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.isAuthorized
-              ? _c(
-                  "router-link",
-                  {
-                    staticClass: "btn btn-outline-success me-2",
-                    attrs: { to: "/bin", tag: "button" }
-                  },
-                  [_vm._v("Корзина")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.isAuthorized
-              ? _c(
                   "button",
                   {
-                    staticClass: "btn btn-outline-success me-2",
+                    staticClass: "btn btn-danger me-2",
                     on: {
                       click: function($event) {
                         return _vm.logout()
                       }
                     }
                   },
-                  [_vm._v("Выход")]
+                  [_vm._v("тест")]
                 )
               : _vm._e()
-          ],
-          1
+          ]
         )
       ]),
       _vm._v(" "),
@@ -46743,25 +46783,25 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [{
   path: '',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../Pages/Store.vue */ "./resources/js/Pages/Store.vue"));
+    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../Pages/Store.vue */ "./resources/js/Pages/Store.vue"));
   },
   name: 'store'
 }, {
   path: '/bin',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../Pages/Bin.vue */ "./resources/js/Pages/Bin.vue"));
+    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../Pages/Bin.vue */ "./resources/js/Pages/Bin.vue"));
   },
   name: 'bin'
 }, {
   path: '/admin',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../Pages/AdminPanel.vue */ "./resources/js/Pages/AdminPanel.vue"));
+    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../Pages/AdminPanel.vue */ "./resources/js/Pages/AdminPanel.vue"));
   },
   name: 'adminPanel'
 }, {
   path: '/account',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../Pages/Account.vue */ "./resources/js/Pages/Account.vue"));
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../Pages/Account.vue */ "./resources/js/Pages/Account.vue"));
   },
   name: 'account'
 }];

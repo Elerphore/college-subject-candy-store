@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionControllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +29,8 @@ Route::post('/registration', [RegisteredUserController::class, 'store']);
 
 Route::get('/products', [ProductController::class, 'getProducts']);
 
-Route::middleware('auth:sanctum')->post('/products', [ProductController::class, 'createTransaction']);
+Route::middleware('auth:sanctum')->put('/products', [ProductController::class, 'createTransaction']);
+
+Route::middleware('auth:sanctum')->get('/transactions', [TransactionController::class, 'getUserTransactions']);
+
+Route::middleware('auth:sanctum')->post('/transactions', [TransactionController::class, 'getUserTransactions']);

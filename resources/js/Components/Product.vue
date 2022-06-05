@@ -19,13 +19,20 @@ export default {
     props: ['item'],
     methods: {
         createTransaction() {
-            console.warn(this.item)
+            console.log(this.apiKey)
+            axios.post('/api/products',
+                { product_id: this.item.id},
+                { headers: { Authorization: `Bearer ${this.apiKey}` } }
+            ).catch(e => {
+                console.error(e)
+            })
         }
     },
 
     computed: {
         ...mapState({
-            isAuthorized: state => state.isAuthorized
+            isAuthorized: state => state.isAuthorized,
+            apiKey: state => state.apiKey,
         }),
     }
 }

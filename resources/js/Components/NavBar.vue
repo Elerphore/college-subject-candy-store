@@ -5,13 +5,24 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <router-link to="/" tag="button" class="btn btn-outline-success me-2">Главная</router-link>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <router-link to="/" tag="button" class="btn btn-outline-primary me-2">Главная</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link v-if="(isAuthorized && isAdmin)" to="/admin" tag="button" class="btn btn-outline-success me-2">Админ панель</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link v-if="isAuthorized" to="/account" tag="button" class="btn btn-outline-success me-2">Кабинет</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link v-if="isAuthorized" to="/bin" tag="button" class="btn btn-outline-success me-2">Корзина</router-link>
+                    </li>
+                </ul>
+
                 <button v-if="!isAuthorized" @click="changeState(false)" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Регистрация</button>
                 <button v-if="!isAuthorized" @click="changeState(true)" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Авторизация</button>
-                <router-link v-if="isAuthorized" to="/admin" tag="button" class="btn btn-outline-success me-2">Админ панель</router-link>
-                <router-link v-if="isAuthorized" to="/account" tag="button" class="btn btn-outline-success me-2">Кабинет</router-link>
-                <router-link v-if="isAuthorized" to="/bin" tag="button" class="btn btn-outline-success me-2">Корзина</router-link>
-                <button @click="logout()" v-if="isAuthorized" class="btn btn-outline-success me-2">Выход</button>
+                <button @click="logout()" v-if="isAuthorized" class="btn btn-danger me-2">Выход</button>
             </div>
         </div>
         <authorization-modal :is-login="isLogin"></authorization-modal>
@@ -41,7 +52,8 @@ export default {
     },
     computed: {
         ...mapState({
-            isAuthorized: state => state.isAuthorized
+            isAuthorized: state => state.isAuthorized,
+            isAdmin: state => state.isAdmin
         }),
     }
 }

@@ -7,14 +7,16 @@ Vue.use(Vuex);
 const defaultState = () => {
     return {
         apiKey: "",
-        isAuthorized: false
+        isAuthorized: false,
+        isAdmin: false
     }
 }
 
 const store = new Vuex.Store({
     state: {
         apiKey: "",
-        isAuthorized: false
+        isAuthorized: false,
+        isAdmin: false
     },
     mutations: {
         INCREMENT(state) {
@@ -23,6 +25,9 @@ const store = new Vuex.Store({
         ASSIGN(state) {
             state.apiKey = localStorage.getItem("api_token")
             state.isAuthorized = true
+        },
+        MAKE_ADMIN(state) {
+            state.isAdmin = true;
         },
         clearStore(state){
             Object.assign(state, defaultState())
