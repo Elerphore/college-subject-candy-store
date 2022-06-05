@@ -46,6 +46,8 @@ Route::middleware('auth:sanctum')->delete('/transaction', [TransactionController
 
 Route::middleware('auth:sanctum')->patch('/user', [UserController::class, 'updateUser']);
 
-Route::middleware('auth:sanctum')->patch('/product', [ProductController::class, 'updateProduct']);
+Route::middleware('auth:sanctum')->post('/update/product', [ProductController::class, 'updateProduct']);
 
 Route::middleware('auth:sanctum')->patch('/transaction', [TransactionController::class, 'updateTransaction']);
+
+Route::middleware('auth:sanctum')->get('/all/transaction', [TransactionController::class, 'getTransactions']);

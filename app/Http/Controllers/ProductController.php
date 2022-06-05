@@ -36,6 +36,12 @@ class ProductController extends Controller
     function updateProduct(Request $request) {
         $product = Product::where('id', $request->id)->first();
 
+        if($request->hasFile('image_file')) {
+            $image = $request->file('image_file');
+            $img_name = $image->getClientOriginalName();
+            $image->move(public_path('/candy'), $img_name);
+        }
+
         $product->name = $request->name;
         $product->amount = $request->amount;
         $product->image = $request->image;

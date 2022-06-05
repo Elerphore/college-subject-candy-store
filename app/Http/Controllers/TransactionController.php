@@ -25,6 +25,12 @@ class TransactionController extends Controller
         ]);
     }
 
+    function getTransactions() {
+        return response()->json([
+            'transactions' => Transaction::all()
+        ]);
+    }
+
     function orderFinished(Request $request) {
         foreach ($request->transactions as $item) {
             Transaction::where('id', $item)->update(['status' => 'COMPLETED']);

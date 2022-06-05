@@ -62,6 +62,10 @@ export default {
     },
     methods: {
         transaction() {
+            this.products = this.products.filter((item) => {
+                !this.selected.includes(item.id)
+            })
+
             axios.post('/api/transactions', {transactions: this.selected}, { headers: { Authorization: `Bearer ${this.apiKey}` } })
         }
     }
