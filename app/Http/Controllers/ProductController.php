@@ -18,6 +18,21 @@ class ProductController extends Controller
         ]);
     }
 
+    function addProduct(Request $request) {
+        $product = new Product;
+
+        if($request->hasFile('image_file')) {
+            $image = $request->file('image_file');
+            $img_name = $image->getClientOriginalName();
+            $image->move(public_path('/candy'), $img_name);
+        }
+
+        $product->name = $request->name;
+        $product->amount = $request->amount;
+        $product->image = $request->image;
+        $product->save();
+    }
+
     function createTransaction(Request $request) {
         $user =  $request->user();
 

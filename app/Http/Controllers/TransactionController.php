@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Transaction;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
-    function getUserTransactions(Request $request): \Illuminate\Http\JsonResponse
+    function getUserTransactions(Request $request): JsonResponse
     {
         $user = $request->user();
 
@@ -62,9 +63,6 @@ class TransactionController extends Controller
 
 
         return PDF::loadHTML($html)->save(public_path('/check.pdf'))->stream('download.pdf');
-
-//        $pdf->loadHTML($html);
-//        return $pdf->stream();
     }
 
     function deleteTransaction(Request $request) {

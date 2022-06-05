@@ -8,24 +8,44 @@
                 <th scope="col">Название</th>
                 <th scope="col">Цена</th>
                 <th scope="col">Изображение</th>
+                <th scope="col">Выбрать новое изображение</th>
             </tr>
             </thead>
-            <tbody v-for="(item, index) in products" :key="index">
+            <tbody>
             <tr>
-                <th scope="row">{{ index }}</th>
-                <td><input type="text" v-model="item.name"></td>
-                <td><input type="text" v-model="item.amount"></td>
+                <th></th>
+                <td><input v-model="product.name" type="text"></td>
+                <td><input v-model="product.amount" type="text"></td>
+                <td>{{ product.image }}</td>
                 <td>
                     <div class="mb-3">
-                        <label for="formFileSm" class="form-label">Текущее изображение: {{ item.image }}</label>
-                        <input @change="imageSelected($event, item)" class="form-control form-control-sm" type="file">
+                        <label :for="`image_input_product}`" class="form-label btn btn-primary">Выбрать</label>
+                        <input style="display: none" :id="`image_input_product}`" @change="imageSelected($event, product)" class="form-control form-control-sm" type="file">
                     </div>
                 </td>
                 <td>
-                    <button @click="updateItem(item, 'product')" type="button" class="btn btn-sm btn-primary">Сохранить изменения</button>
-                    <button @click="deleteItem(item.id, 'product')" type="button" class="btn btn-sm btn-danger">Удалить</button>
+                    <button @click="addItem('product')" type="button" class="btn btn-sm btn-success mb-1">Добавить</button>
                 </td>
             </tr>
+            <template v-for="(item, index) in products">
+                <tr>
+                    <th scope="row">{{ index }}</th>
+                    <td><input type="text" v-model="item.name"></td>
+                    <td><input type="text" v-model="item.amount"></td>
+                    <td>{{ item.image }}</td>
+                    <td>
+                        <div class="mb-3">
+                            <label :for="`image_input_${index}`" class="form-label btn btn-primary">Выбрать</label>
+                            <input style="display: none" :id="`image_input_${index}`" @change="imageSelected($event, item)" class="form-control form-control-sm" type="file">
+                        </div>
+                    </td>
+                    <td>
+                        <button @click="updateItem(item, 'product')" type="button" class="btn btn-sm btn-primary mb-1">Сохранить изменения</button>
+                        <button @click="deleteItem(item.id, 'product')" type="button" class="btn btn-sm btn-danger">Удалить</button>
+                    </td>
+                </tr>
+            </template>
+
             </tbody>
         </table>
 
@@ -37,19 +57,35 @@
                 <th scope="col">Логин</th>
                 <th scope="col">Почта</th>
                 <th scope="col">Пароль</th>
+                <th scope="col">Администратор</th>
             </tr>
             </thead>
-            <tbody v-for="(item, index) in users" :key="index">
+            <tbody>
+
             <tr>
-                <th scope="row">{{ index }}</th>
-                <td><input type="text" v-model="item.login"></td>
-                <td><input type="text" v-model="item.email"></td>
-                <td><input type="text" v-model="item.password"></td>
+                <th></th>
+                <td><input v-model="user.login" type="text"></td>
+                <td><input v-model="user.email" type="text"></td>
+                <td><input v-model="user.password" type="text"></td>
+                <td><input type="checkbox" v-model="user.isAdmin"></td>
                 <td>
-                    <button @click="updateItem(item, 'user')" type="button" class="btn btn-sm btn-primary">Сохранить изменения</button>
-                    <button @click="deleteItem(item.id, 'user')" type="button" class="btn btn-sm btn-danger">Удалить</button>
+                    <button @click="addItem('user')" type="button" class="btn btn-sm btn-success mb-1">Добавить</button>
                 </td>
             </tr>
+
+            <template v-for="(item, index) in users">
+                <tr>
+                    <th scope="row">{{ index }}</th>
+                    <td><input type="text" v-model="item.login"></td>
+                    <td><input type="text" v-model="item.email"></td>
+                    <td><input type="text" v-model="item.password"></td>
+                    <td><input type="checkbox" v-model="item.isAdmin"></td>
+                    <td>
+                        <button @click="updateItem(item, 'user')" type="button" class="btn btn-sm btn-primary mb-1">Сохранить изменения</button>
+                        <button @click="deleteItem(item.id, 'user')" type="button" class="btn btn-sm btn-danger">Удалить</button>
+                    </td>
+                </tr>
+            </template>
             </tbody>
         </table>
 
@@ -72,7 +108,7 @@
                 <td><input type="text" v-model="item.status"></td>
                 <td><input type="text" v-model="item.created_at"></td>
                 <td>
-                    <button @click="updateItem(item, 'transaction')" type="button" class="btn btn-sm btn-primary">Сохранить изменения</button>
+                    <button @click="updateItem(item, 'transaction')" type="button" class="btn btn-sm btn-primary mb-1">Сохранить изменения</button>
                     <button @click="deleteItem(item.id, 'transaction')" type="button" class="btn btn-sm btn-danger">Удалить</button>
                 </td>
             </tr>
@@ -92,7 +128,19 @@ export default {
         return {
             products: [],
             users: [],
-            transactions: []
+            transactions: [],
+            product: {
+                name: "",
+                image: "",
+                amount: 0.00,
+                imageFile: "",
+            },
+            user: {
+                login: "",
+                email: "",
+                password: "",
+                isAdmin: false,
+            }
         }
     },
     computed: {
@@ -112,6 +160,7 @@ export default {
     },
     methods: {
         imageSelected(e, item){
+            console.log("hello")
             item.image = e.target.files[0].name
             item.imageFile = e.target.files[0]
         },
@@ -144,16 +193,15 @@ export default {
                     break;
                 case 'user':
                     axios.patch('/api/user',
-                        {id: item.id, login: item.login, email: item.email, password: item.password},
+                        {id: item.id, login: item.login, email: item.email, password: item.password, isAdmin: item.isAdmin},
                         { headers: {Authorization: `Bearer ${this.apiKey}`}})
                     break;
                 case 'product':
                     let fd = new FormData();
-                    // fd.append('id', item.id);
-                    // fd.append('name', item.name);
-                    // fd.append('amount', item.amount);
-                    // fd.append('image', item.image);
-                    fd.append('data', JSON.stringify({id: item.id, name: item.name, amount: item.amount, image: item.image}));
+                    fd.append('id', item.id);
+                    fd.append('name', item.name);
+                    fd.append('amount', item.amount);
+                    fd.append('image', item.image);
                     fd.append('image_file', item.imageFile);
 
                     console.error(fd.get('image_file'))
@@ -169,6 +217,38 @@ export default {
                         .catch((e) => {
                             console.error(e)
                         })
+                    break;
+            }
+        },
+        addItem(type) {
+            switch (type) {
+                case 'user':
+                    axios.put('/api/addUser',
+                        {
+                            login: this.user.login,
+                            password: this.user.password,
+                            email: this.user.email,
+                            isAdmin: this.user.isAdmin,
+                            },
+                        { headers: {Authorization: `Bearer ${this.apiKey}`}}
+                    ).then(resp => {
+                        this.users.push(this.user)
+                    })
+                    break;
+                case 'product':
+                    console.warn(this.product)
+                    let fd = new FormData();
+                    fd.append('name', this.product.name);
+                    fd.append('amount', this.product.amount);
+                    fd.append('image', this.product.image);
+                    fd.append('image_file', this.product.imageFile);
+
+                    axios.post('/api/addProduct',
+                        fd,
+                        { headers: {Authorization: `Bearer ${this.apiKey}`}}
+                    ).then(resp => {
+                        this.products.push(this.product)
+                    })
                     break;
             }
         }

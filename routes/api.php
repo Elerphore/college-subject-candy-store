@@ -30,6 +30,10 @@ Route::post('/registration', [RegisteredUserController::class, 'store']);
 
 Route::get('/products', [ProductController::class, 'getProducts']);
 
+Route::middleware('auth:sanctum')->post('/addProduct', [ProductController::class, 'addProduct']);
+
+Route::middleware('auth:sanctum')->put('/addUser', [UserController::class, 'addUser']);
+
 Route::middleware('auth:sanctum')->put('/products', [ProductController::class, 'createTransaction']);
 
 Route::middleware('auth:sanctum')->get('/transactions', [TransactionController::class, 'getUserTransactions']);

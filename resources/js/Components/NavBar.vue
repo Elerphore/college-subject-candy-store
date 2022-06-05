@@ -48,6 +48,7 @@ export default {
         async logout() {
             localStorage.clear();
             this.$store.commit("clearStore")
+            await this.$router.push('/')
         }
     },
     computed: {

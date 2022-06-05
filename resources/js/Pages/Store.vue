@@ -1,7 +1,6 @@
 <template>
     <div class="store">
         <products-list class="container"></products-list>
-        <window-footer></window-footer>
     </div>
 </template>
 

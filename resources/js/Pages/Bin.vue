@@ -22,7 +22,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="gap-2 mx-auto">
+        <div class="gap-2 mx-auto" v-if="products.length > 0">
             <button class="btn btn-primary" type="button" @click="transaction()">Оформить заказ</button>
         </div>
     </div>
@@ -66,9 +66,10 @@ export default {
                 !this.selected.includes(item.id)
             })
 
-            axios.post('/api/transactions', {transactions: this.selected}, { headers: { responseType: 'blob', Authorization: `Bearer ${this.apiKey}` } })
-                .then((response) => {
+            axios.post('/api/transactions', {transactions: this.selected}, { headers: { Authorization: `Bearer ${this.apiKey}` } })
+                .then(() => {
                     window.open("/check.pdf")
+                    this.$router.push('/')
                 })
         }
     }

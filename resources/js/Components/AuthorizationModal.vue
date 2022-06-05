@@ -19,7 +19,7 @@
                             <label>Пароль</label>
                             <input v-model="user.password" type="password" class="form-control">
                         </div>
-                        <div class="d-grid gap-2">
+                        <div class="d-grid gap-2 mt-3">
                             <button data-bs-dismiss="modal" @click="tryToAuthorize()" class="btn btn-primary" type="button">{{ title }}</button>
                         </div>
                 </div>

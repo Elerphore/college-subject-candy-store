@@ -17,6 +17,15 @@ class UserController extends Controller
         ]);
     }
 
+    function addUser(Request $request) {
+        $user = new User();
+        $user->login = $request->login;
+        $user->email = $request->email;
+        $user->isAdmin = $request->isAdmin;
+        $user->password = Hash::make($request->password);
+        $user->save();
+    }
+
     function deleteUser(Request $request) {
         User::destroy($request->id);
     }
@@ -27,6 +36,7 @@ class UserController extends Controller
         $user->login = $request->login;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->isAdmin = $request->isAdmin;
         $user->save();
     }
 }
