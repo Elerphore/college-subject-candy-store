@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         <product v-for="item in products" :item="item"></product>
     </div>
 </template>

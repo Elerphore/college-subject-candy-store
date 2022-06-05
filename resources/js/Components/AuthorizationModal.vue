@@ -106,6 +106,9 @@ export default {
             }).then(resp => {
                 localStorage.setItem("api_token", resp.data.access_token)
                 this.$store.commit('ASSIGN');
+                if(resp.data.isAdmin) {
+                    this.$store.commit('MAKE_ADMIN');
+                }
             }).catch((err) => {
                 console.log(err)
             })

@@ -9,17 +9,29 @@ use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
-    function getUserTransactions(Request $request): Collection
+    function getUserTransactions(Request $request): \Illuminate\Http\JsonResponse
     {
         $user = $request->user();
 
         $collection = DB::table('transactions')->
             join('products' , 'transactions.product_id' , '=','products.id') ->
-            select ('transactions.id', 'products.name', 'products.amount', 'products.image')
+            select ('transactions.id', 'transactions.status' ,'products.name', 'products.amount', 'transactions.created_at')
             ->where('transactions.user_id' , $user->id)
             ->where('transactions.status', $request->type)
             ->get();
 
-        return $collection;
+        return response()->json([
+            'transactions' => $collection
+        ]);
+    }
+
+    function orderFinished(Request $request) {
+        foreach ($request->transactions as $item) {
+            Transaction::where('id', $item)->update(['status' => 'COMPLETED']);
+        }
+
+        return response()->json([
+            'message' => 'ok'
+        ]);
     }
 }

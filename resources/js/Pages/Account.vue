@@ -1,6 +1,24 @@
 <template>
     <div class="account">
-        <h1>{{ products }}</h1>
+        <h1>Свершённые транзакции</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Название</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Дата</th>
+            </tr>
+            </thead>
+            <tbody v-for="(item, index) in products" :key="index">
+            <tr>
+                <th scope="row">{{ index }}</th>
+                <td>{{ item.name }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.created_at }}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -22,14 +40,14 @@ export default {
     },
     mounted() {
         console.log(this.apiKey)
-        axios.post('/api/products',
+        axios.get('/api/transactions',
             {
-                type: 'COMPLETED'
-            },
-            { headers: { Authorization: `Bearer ${this.apiKey}` } }
+                params: { type: 'COMPLETED' },
+                headers: { Authorization: `Bearer ${this.apiKey}` },
+            }
         ).then(resp => {
             console.log(this.products)
-            this.products = resp.data
+            this.products = resp.data.transactions
         }).catch(e => {
             console.error(e)
         })

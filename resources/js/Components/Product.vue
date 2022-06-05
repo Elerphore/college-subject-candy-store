@@ -20,7 +20,7 @@ export default {
     methods: {
         createTransaction() {
             console.log(this.apiKey)
-            axios.post('/api/products',
+            axios.put('/api/products',
                 { product_id: this.item.id},
                 { headers: { Authorization: `Bearer ${this.apiKey}` } }
             ).catch(e => {
@@ -39,5 +39,9 @@ export default {
 </script>
 
 <style scoped>
-
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
 </style>

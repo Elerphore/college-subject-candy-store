@@ -7,7 +7,6 @@
                 <th scope="col">#</th>
                 <th scope="col">Название</th>
                 <th scope="col">Цена</th>
-                <th scope="col">Изображение</th>
                 <th scope="col">Выбрать</th>
             </tr>
             </thead>
@@ -16,9 +15,8 @@
                     <th scope="row">{{ index }}</th>
                     <td>{{ item.name }}</td>
                     <td>{{ item.amount }}</td>
-                    <td>{{ item.image }}</td>
                     <td>
-                        <input :value="item" v-model="selected" type="checkbox" class="btn-check" :id="`btncheck_${index}`" autocomplete="off">
+                        <input :value="item.id" v-model="selected" type="checkbox" class="btn-check" :id="`btncheck_${index}`" autocomplete="off">
                         <label class="btn btn-outline-primary" :for="`btncheck_${index}`">Выбрать</label>
                     </td>
                 </tr>
@@ -56,14 +54,15 @@ export default {
             }
         ).then(resp => {
             console.log(this.products)
-            this.products = resp.data
+            this.products = resp.data.transactions
+            this.selected = resp.data.transactions.map(item => item.id);
         }).catch(e => {
             console.error(e)
         })
     },
     methods: {
         transaction() {
-            axios.post()
+            axios.post('/api/transactions', {transactions: this.selected}, { headers: { Authorization: `Bearer ${this.apiKey}` } })
         }
     }
 

@@ -17,27 +17,53 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'login' => Str::random(10),
-            'email' => Str::random(10).'@gmail.com',
-            'password' => Hash::make('password'),
+            'login' => 'user',
+            'email' => 'user@gmail.com',
+            'password' => Hash::make('user'),
+            'isAdmin' => 0
         ]);
 
         DB::table('users')->insert([
-            'login' => Str::random(10),
-            'email' => Str::random(10).'@gmail.com',
-            'password' => Hash::make('password'),
+            'login' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('admin'),
+            'isAdmin' => 1
         ]);
 
         DB::table('products')->insert([
-            'name' => 'Tasty Candy',
+            'name' => 'Халва',
             'amount' => 100,
-            'image' => 'tasty_candy.png'
+            'image' => 'Халва.jpg'
         ]);
 
         DB::table('products')->insert([
-            'name' => 'Not Tasty Candy',
+            'name' => 'Безе',
             'amount' => 0,
-            'image' => 'not_tasty_candy.png'
+            'image' => 'Безе.jpg'
+        ]);
+
+        DB::table('products')->insert([
+            'name' => 'Пастила',
+            'amount' => 0,
+            'image' => 'Пастила.jpg'
+        ]);
+
+        DB::table('products')->insert([
+            'name' => 'Марципан',
+            'amount' => 0,
+            'image' => 'Марципан.jpg'
+        ]);
+
+        DB::table('products')->insert([
+            'name' => 'Чизкейк',
+            'amount' => 0,
+            'image' => 'Чизкейк.jpg'
+        ]);
+
+        DB::table('products')->insert([
+            'name' => 'Зефир',
+            'amount' => 0,
+            'image' => 'Зефир.jpg'
         ]);
     }
 }
