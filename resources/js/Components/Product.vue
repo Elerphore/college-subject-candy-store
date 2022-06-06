@@ -1,10 +1,12 @@
 <template>
-    <div>
-        <div class="card" style="width: 18rem;">
+    <div class="col">
+        <div class="card h-100" style="width: 18rem;">
             <img :src="'candy/'+item.image" class="card-img-top" alt="">
             <div class="card-body">
-                <h5 class="card-title">{{ item.name }}</h5>
-                <p class="card-text">{{ item.amount }}</p>
+                <h5 class="card-title">{{ item.name }} : {{ item.amount }}</h5>
+                <p class="card-text">{{ item.description }}</p>
+            </div>
+            <div class="card-footer">
                 <button v-if="isAuthorized" @click="createTransaction()" class="btn btn-primary">В корзину</button>
             </div>
         </div>

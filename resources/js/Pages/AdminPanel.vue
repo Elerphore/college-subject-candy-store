@@ -6,7 +6,9 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Название</th>
+                <th scope="col">Описание</th>
                 <th scope="col">Цена</th>
+                <th scope="col">Начинка</th>
                 <th scope="col">Изображение</th>
                 <th scope="col">Выбрать новое изображение</th>
             </tr>
@@ -15,7 +17,9 @@
             <tr>
                 <th></th>
                 <td><input v-model="product.name" type="text"></td>
+                <td><input v-model="product.description" type="text"></td>
                 <td><input v-model="product.amount" type="text"></td>
+                <td><input v-model="product.filling" type="checkbox"></td>
                 <td>{{ product.image }}</td>
                 <td>
                     <div class="mb-3">
@@ -31,7 +35,9 @@
                 <tr>
                     <th scope="row">{{ index }}</th>
                     <td><input type="text" v-model="item.name"></td>
+                    <td><input type="text" v-model="item.description"></td>
                     <td><input type="text" v-model="item.amount"></td>
+                    <td><input v-model="item.filling" type="checkbox"></td>
                     <td>{{ item.image }}</td>
                     <td>
                         <div class="mb-3">
@@ -133,6 +139,8 @@ export default {
                 name: "",
                 image: "",
                 amount: 0.00,
+                filling: false,
+                description: "",
                 imageFile: "",
             },
             user: {
@@ -201,7 +209,9 @@ export default {
                     fd.append('id', item.id);
                     fd.append('name', item.name);
                     fd.append('amount', item.amount);
+                    fd.append('description', item.description);
                     fd.append('image', item.image);
+                    fd.append('filling', Number(item.filling));
                     fd.append('image_file', item.imageFile);
 
                     console.error(fd.get('image_file'))
@@ -240,7 +250,9 @@ export default {
                     let fd = new FormData();
                     fd.append('name', this.product.name);
                     fd.append('amount', this.product.amount);
+                    fd.append('description', this.product.description);
                     fd.append('image', this.product.image);
+                    fd.append('filling', Number(this.product.filling));
                     fd.append('image_file', this.product.imageFile);
 
                     axios.post('/api/addProduct',

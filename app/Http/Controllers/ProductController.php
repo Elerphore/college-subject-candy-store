@@ -29,6 +29,8 @@ class ProductController extends Controller
 
         $product->name = $request->name;
         $product->amount = $request->amount;
+        $product->description = $request->description;
+        $product->filling = $request->filling;
         $product->image = $request->image;
         $product->save();
     }
@@ -61,6 +63,8 @@ class ProductController extends Controller
 
         $product->name = $request->name;
         $product->amount = $request->amount;
+        $product->description = $request->description;
+        $product->filling = $request->filling;
         $product->image = $request->image;
         $product->save();
 

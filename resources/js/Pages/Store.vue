@@ -1,6 +1,10 @@
 <template>
     <div class="store">
-        <products-list class="container"></products-list>
+        <div class="mb-3">
+            <button class="btn btn-outline-primary" @click="filter(false)">Изделия</button>
+            <button class="btn btn-outline-primary" @click="filter(true)">Начинки для тортов</button>
+        </div>
+        <products-list :filter="isFilter" class="container"></products-list>
     </div>
 </template>
 
@@ -13,12 +17,20 @@ import { mapState } from 'vuex';
 
 export default {
     name: "Store",
+    data() {
+        return {
+            isFilter: false
+        }
+    },
     components: {NavBar, WindowFooter, ProductsList},
     computed: {
         ...mapState({
             isAuthorized: state => state.isAuthorized,
             apiKey: state => state.apiKey
         }),
+    },
+    methods: {
+        filter(state) { this.isFilter = state }
     }
 
 }

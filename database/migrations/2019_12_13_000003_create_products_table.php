@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->longText('description')->default("");
+            $table->boolean('filling')->default(false);
             $table->decimal('amount', $precision = 8, $scale = 2);
             $table->string('image');
         });
