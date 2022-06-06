@@ -29,6 +29,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Product",
@@ -78,6 +80,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProductsList",
+  props: {
+    filter: {
+      type: Boolean,
+      "default": true
+    }
+  },
   components: {
     Product: _Product__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -89,6 +97,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    console.error("is filter: " + this.filter);
     axios.get("/api/products").then(function (resp) {
       _this.products = resp.data.products;
     });
@@ -122,12 +131,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Store",
+  data: function data() {
+    return {
+      isFilter: false
+    };
+  },
   components: {
     NavBar: _Components_NavBar__WEBPACK_IMPORTED_MODULE_2__["default"],
     WindowFooter: _Components_WindowFooter__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -140,7 +158,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     apiKey: function apiKey(state) {
       return state.apiKey;
     }
-  }))
+  })),
+  methods: {
+    filter: function filter(state) {
+      this.isFilter = state;
+    }
+  }
 });
 
 /***/ }),
@@ -209,8 +232,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "card", staticStyle: { width: "18rem" } }, [
+  return _c("div", { staticClass: "col" }, [
+    _c("div", { staticClass: "card h-100", staticStyle: { width: "18rem" } }, [
       _c("img", {
         staticClass: "card-img-top",
         attrs: { src: "candy/" + _vm.item.image, alt: "" }
@@ -218,13 +241,15 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("h5", { staticClass: "card-title" }, [
-          _vm._v(_vm._s(_vm.item.name))
+          _vm._v(_vm._s(_vm.item.name) + " : " + _vm._s(_vm.item.amount))
         ]),
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
-          _vm._v(_vm._s(_vm.item.amount))
-        ]),
-        _vm._v(" "),
+          _vm._v(_vm._s(_vm.item.description))
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-footer" }, [
         _vm.isAuthorized
           ? _c(
               "button",
@@ -269,7 +294,10 @@ var render = function() {
     "div",
     { staticClass: "row row-cols-1 row-cols-md-3 g-4" },
     _vm._l(_vm.products, function(item) {
-      return _c("product", { attrs: { item: item } })
+      return item.filling == _vm.filter ||
+        (item.filling == null && _vm.filter == false)
+        ? _c("product", { attrs: { item: item } })
+        : _vm._e()
     }),
     1
   )
@@ -299,7 +327,40 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "store" },
-    [_c("products-list", { staticClass: "container" })],
+    [
+      _c("div", { staticClass: "mb-3" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-primary",
+            on: {
+              click: function($event) {
+                return _vm.filter(false)
+              }
+            }
+          },
+          [_vm._v("Изделия")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-primary",
+            on: {
+              click: function($event) {
+                return _vm.filter(true)
+              }
+            }
+          },
+          [_vm._v("Начинки для тортов")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("products-list", {
+        staticClass: "container",
+        attrs: { filter: _vm.isFilter }
+      })
+    ],
     1
   )
 }

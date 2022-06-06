@@ -146,6 +146,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -159,6 +165,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         name: "",
         image: "",
         amount: 0.00,
+        filling: false,
+        description: "",
         imageFile: ""
       },
       user: {
@@ -307,7 +315,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           fd.append('id', item.id);
           fd.append('name', item.name);
           fd.append('amount', item.amount);
+          fd.append('description', item.description);
           fd.append('image', item.image);
+          fd.append('filling', Number(item.filling));
           fd.append('image_file', item.imageFile);
           console.error(fd.get('image_file'));
           axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/update/product", fd, {
@@ -345,7 +355,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           var fd = new FormData();
           fd.append('name', this.product.name);
           fd.append('amount', this.product.amount);
+          fd.append('description', this.product.description);
           fd.append('image', this.product.image);
+          fd.append('filling', Number(this.product.filling));
           fd.append('image_file', this.product.imageFile);
           axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/addProduct', fd, {
             headers: {
@@ -418,6 +430,29 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
+                    value: _vm.product.description,
+                    expression: "product.description"
+                  }
+                ],
+                attrs: { type: "text" },
+                domProps: { value: _vm.product.description },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.product, "description", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
                     value: _vm.product.amount,
                     expression: "product.amount"
                   }
@@ -430,6 +465,49 @@ var render = function() {
                       return
                     }
                     _vm.$set(_vm.product, "amount", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.product.filling,
+                    expression: "product.filling"
+                  }
+                ],
+                attrs: { type: "checkbox" },
+                domProps: {
+                  checked: Array.isArray(_vm.product.filling)
+                    ? _vm._i(_vm.product.filling, null) > -1
+                    : _vm.product.filling
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.product.filling,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.product, "filling", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.product,
+                            "filling",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.product, "filling", $$c)
+                    }
                   }
                 }
               })
@@ -512,6 +590,29 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
+                        value: item.description,
+                        expression: "item.description"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: item.description },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(item, "description", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
                         value: item.amount,
                         expression: "item.amount"
                       }
@@ -524,6 +625,49 @@ var render = function() {
                           return
                         }
                         _vm.$set(item, "amount", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: item.filling,
+                        expression: "item.filling"
+                      }
+                    ],
+                    attrs: { type: "checkbox" },
+                    domProps: {
+                      checked: Array.isArray(item.filling)
+                        ? _vm._i(item.filling, null) > -1
+                        : item.filling
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = item.filling,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(item, "filling", $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                item,
+                                "filling",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(item, "filling", $$c)
+                        }
                       }
                     }
                   })
@@ -1039,7 +1183,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Название")]),
         _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Описание")]),
+        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Цена")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Начинка")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Изображение")]),
         _vm._v(" "),
