@@ -1,6 +1,6 @@
 <template>
     <div class="account">
-        <h1>Свершённые транзакции</h1>
+        <h1>Завершённые транзакции</h1>
         <table class="table">
             <thead>
             <tr>

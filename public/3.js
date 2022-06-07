@@ -124,7 +124,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "bin" }, [
-    _c("h1", [_vm._v("Козрина")]),
+    _c("h1", [_vm._v("Корзина")]),
     _vm._v(" "),
     _c(
       "table",

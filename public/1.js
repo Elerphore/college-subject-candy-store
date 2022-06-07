@@ -94,7 +94,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "account" }, [
-    _c("h1", [_vm._v("Свершённые транзакции")]),
+    _c("h1", [_vm._v("Завершённые транзакции")]),
     _vm._v(" "),
     _c(
       "table",

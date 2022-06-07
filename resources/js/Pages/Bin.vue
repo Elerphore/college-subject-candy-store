@@ -1,6 +1,6 @@
 <template>
     <div class="bin">
-        <h1>Козрина</h1>
+        <h1>Корзина</h1>
         <table class="table">
             <thead>
             <tr>
