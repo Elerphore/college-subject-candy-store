@@ -287,6 +287,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch('/api/user', {
             id: item.id,
             login: item.login,
+            fio: item.fio,
             email: item.email,
             password: item.password,
             isAdmin: item.isAdmin

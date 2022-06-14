@@ -190,7 +190,7 @@ export default {
             switch (type) {
                 case 'user':
                     axios.patch('/api/user',
-                        {id: item.id, login: item.login, email: item.email, password: item.password, isAdmin: item.isAdmin},
+                        {id: item.id, login: item.login, fio: item.fio, email: item.email, password: item.password, isAdmin: item.isAdmin},
                         { headers: {Authorization: `Bearer ${this.apiKey}`}})
                     break;
                 case 'product':
