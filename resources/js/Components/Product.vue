@@ -4,10 +4,10 @@
             <img :src="'candy/'+item.image" class="card-img-top" alt="">
             <div class="card-body">
                 <h5 class="card-title">{{ item.name }} : {{ item.amount }}</h5>
-                <p class="card-text">{{ item.description }}</p>
             </div>
             <div class="card-footer">
                 <button v-if="isAuthorized" @click="createTransaction()" class="btn btn-primary">В корзину</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="`#product-description-${index}`">Описание</button>
             </div>
         </div>
     </div>
@@ -15,10 +15,11 @@
 
 <script>
 import {mapState} from "vuex";
+// import ProductModal from "./ProductModal";
 
 export default {
     name: "Product",
-    props: ['item'],
+    props: ['item', 'index'],
     methods: {
         createTransaction() {
             console.log(this.apiKey)
@@ -36,6 +37,9 @@ export default {
             isAuthorized: state => state.isAuthorized,
             apiKey: state => state.apiKey,
         }),
+    },
+    mounted() {
+        console.warn(this.item)
     }
 }
 </script>

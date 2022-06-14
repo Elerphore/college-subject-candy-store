@@ -1,7 +1,8 @@
 <template>
-  <div class="app d-grid align-content-between">
+  <div class="app d-flex flex-column min-vh-100">
       <nav-bar class="mb-5"></nav-bar>
-      <router-view class="container mb-5"></router-view>
+      <router-view class="container mb-2"></router-view>
+      <window-footer style="height: 16vh;" class="mt-auto"></window-footer>
   </div>
 </template>
 

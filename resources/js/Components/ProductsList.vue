@@ -1,11 +1,15 @@
 <template>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        <product v-for="item in products" v-if="(item.filling == filter) || (item.filling == null && filter == false)" :item="item"></product>
+        <template v-for="(item, index) in products" v-if="(item.filling == filter) || (item.filling == null && filter == false)" :item="item">
+            <product :item="item" :index="index"></product>
+            <product-modal :title.sync="item.name" :description.sync="item.description" :id-modal="index"></product-modal>
+        </template>
     </div>
 </template>
 
 <script>
 import Product from "./Product";
+import ProductModal from "./ProductModal";
 export default {
     name: "ProductsList",
     props: {
@@ -14,7 +18,7 @@ export default {
             default: true
         }
     },
-    components: {Product},
+    components: {ProductModal, Product},
     data() {
         return {
             products: []

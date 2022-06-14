@@ -5240,6 +5240,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -5272,6 +5273,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5487,40 +5494,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -29695,11 +29668,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "app d-grid align-content-between" },
+    { staticClass: "app d-flex flex-column min-vh-100" },
     [
       _c("nav-bar", { staticClass: "mb-5" }),
       _vm._v(" "),
-      _c("router-view", { staticClass: "container mb-5" })
+      _c("router-view", { staticClass: "container mb-2" }),
+      _vm._v(" "),
+      _c("window-footer", {
+        staticClass: "mt-auto",
+        staticStyle: { height: "16vh" }
+      })
     ],
     1
   )
@@ -29760,109 +29738,129 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "modal-body" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Логин")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.user.login,
-                    expression: "user.login"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.user.login },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+          _c(
+            "div",
+            { staticClass: "modal-body" },
+            [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Логин")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user.login,
+                      expression: "user.login"
                     }
-                    _vm.$set(_vm.user, "login", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            !_vm.isLogin
-              ? _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Почта")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.user.email,
-                        expression: "user.email"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "email" },
-                    domProps: { value: _vm.user.email },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.user, "email", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Пароль")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.user.password,
-                    expression: "user.password"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "password" },
-                domProps: { value: _vm.user.password },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.user, "password", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-grid gap-2 mt-3" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  attrs: { "data-bs-dismiss": "modal", type: "button" },
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.user.login },
                   on: {
-                    click: function($event) {
-                      return _vm.tryToAuthorize()
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.user, "login", $event.target.value)
                     }
                   }
-                },
-                [_vm._v(_vm._s(_vm.title))]
-              )
-            ])
-          ])
+                })
+              ]),
+              _vm._v(" "),
+              !_vm.isLogin
+                ? [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Почта")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.user.email,
+                            expression: "user.email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "email" },
+                        domProps: { value: _vm.user.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.user, "email", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(0)
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Пароль")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user.password,
+                      expression: "user.password"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "password" },
+                  domProps: { value: _vm.user.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.user, "password", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "d-grid gap-2 mt-3" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { "data-bs-dismiss": "modal", type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.tryToAuthorize()
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.title))]
+                )
+              ])
+            ],
+            2
+          )
         ])
       ])
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", [_vm._v("ФИО")]),
+      _vm._v(" "),
+      _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -30089,49 +30087,35 @@ var staticRenderFns = [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-lg-6 col-md-12 mb-4 mb-md-0" }, [
               _c("h5", { staticClass: "text-uppercase" }, [
-                _vm._v("Footer Content")
+                _vm._v("Candy Store")
               ]),
               _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "\n                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis\n                    molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae\n                    aliquam voluptatem veniam, est atque cumque eum delectus sint!\n                "
-                )
-              ])
+              _c("p", [_vm._v("Магазин кондитерских изделий")])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-lg-3 col-md-6 mb-4 mb-md-0" }, [
-              _c("h5", { staticClass: "text-uppercase" }, [_vm._v("Links")]),
+              _c("h5", { staticClass: "text-uppercase" }, [_vm._v("Спонсоры")]),
               _vm._v(" "),
               _c("ul", { staticClass: "list-unstyled mb-0" }, [
                 _c("li", [
                   _c(
                     "a",
-                    { staticClass: "text-white", attrs: { href: "#!" } },
-                    [_vm._v("Link 1")]
+                    {
+                      staticClass: "text-white",
+                      attrs: { href: "https://vk.com/nmstu" }
+                    },
+                    [_vm._v("МГТУ")]
                   )
                 ]),
                 _vm._v(" "),
                 _c("li", [
                   _c(
                     "a",
-                    { staticClass: "text-white", attrs: { href: "#!" } },
-                    [_vm._v("Link 2")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    { staticClass: "text-white", attrs: { href: "#!" } },
-                    [_vm._v("Link 3")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    { staticClass: "text-white", attrs: { href: "#!" } },
-                    [_vm._v("Link 4")]
+                    {
+                      staticClass: "text-white",
+                      attrs: { href: "https://newlms.magtu.ru" }
+                    },
+                    [_vm._v("ФГБОУ")]
                   )
                 ])
               ])
@@ -30139,64 +30123,32 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "col-lg-3 col-md-6 mb-4 mb-md-0" }, [
               _c("h5", { staticClass: "text-uppercase mb-0" }, [
-                _vm._v("Links")
+                _vm._v("Связаться")
               ]),
               _vm._v(" "),
               _c("ul", { staticClass: "list-unstyled" }, [
                 _c("li", [
                   _c(
                     "a",
-                    { staticClass: "text-white", attrs: { href: "#!" } },
-                    [_vm._v("Link 1")]
+                    {
+                      staticClass: "text-white",
+                      attrs: { href: "https://vk.com/alchemic__28" }
+                    },
+                    [_vm._v("Вконтакте")]
                   )
                 ]),
                 _vm._v(" "),
                 _c("li", [
                   _c(
                     "a",
-                    { staticClass: "text-white", attrs: { href: "#!" } },
-                    [_vm._v("Link 2")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    { staticClass: "text-white", attrs: { href: "#!" } },
-                    [_vm._v("Link 3")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    { staticClass: "text-white", attrs: { href: "#!" } },
-                    [_vm._v("Link 4")]
+                    { staticClass: "text-white", attrs: { href: "+790000" } },
+                    [_vm._v("Номер: +79000000")]
                   )
                 ])
               ])
             ])
           ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "text-center p-3",
-            staticStyle: { "background-color": "rgba(0, 0, 0, 0.2)" }
-          },
-          [
-            _vm._v("\n        © 2020 Copyright:\n        "),
-            _c(
-              "a",
-              {
-                staticClass: "text-white",
-                attrs: { href: "https://mdbootstrap.com/" }
-              },
-              [_vm._v("MDBootstrap.com")]
-            )
-          ]
-        )
+        ])
       ]
     )
   }
@@ -47237,8 +47189,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/eler/laravel-vue-minimal/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/eler/laravel-vue-minimal/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\OpenServer\domains\localhost\college-subject-candy-store\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\OpenServer\domains\localhost\college-subject-candy-store\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })
