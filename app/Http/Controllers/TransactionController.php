@@ -56,6 +56,7 @@ class TransactionController extends Controller
             "<h1>Магазин кондитерских изделий: Candy Store</h1>".
             "<h1>Чек: на сумму: {$sum}</h1>".
             "<h1>Логин: {$user->login}</h1>".
+            "<h1>ФИО: {$user->fio}</h1>".
             "<h1>Почта: {$user->email}</h1>".
             "<ul>Товары: {$products}</ul>".
             "</body>".

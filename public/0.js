@@ -308,7 +308,7 @@ var render = function() {
           ? _c(
               "button",
               {
-                staticClass: "btn btn-primary",
+                staticClass: "btn btn-primary mb-3",
                 on: {
                   click: function($event) {
                     return _vm.createTransaction()

@@ -35,6 +35,7 @@ class UserController extends Controller
 
         $user->login = $request->login;
         $user->email = $request->email;
+        $user->fio = $request->fio;
         $user->password = Hash::make($request->password);
         $user->isAdmin = $request->isAdmin;
         $user->save();

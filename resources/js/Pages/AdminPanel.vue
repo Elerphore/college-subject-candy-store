@@ -62,6 +62,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Логин</th>
                 <th scope="col">Почта</th>
+                <th scope="col">ФИО</th>
                 <th scope="col">Пароль</th>
                 <th scope="col">Администратор</th>
             </tr>
@@ -72,6 +73,7 @@
                 <th></th>
                 <td><input v-model="user.login" type="text"></td>
                 <td><input v-model="user.email" type="text"></td>
+                <td><input v-model="user.fio" type="text"></td>
                 <td><input v-model="user.password" type="text"></td>
                 <td><input type="checkbox" v-model="user.isAdmin"></td>
                 <td>
@@ -84,6 +86,7 @@
                     <th scope="row">{{ index }}</th>
                     <td><input type="text" v-model="item.login"></td>
                     <td><input type="text" v-model="item.email"></td>
+                    <td><input type="text" v-model="item.fio"></td>
                     <td><input type="text" v-model="item.password"></td>
                     <td><input type="checkbox" v-model="item.isAdmin"></td>
                     <td>
@@ -111,12 +114,9 @@
                 <th scope="row">{{ index }}</th>
                 <td><input type="text" v-model="item.user_id"></td>
                 <td><input type="text" v-model="item.product_id"></td>
-                <td><input type="text" v-model="item.status"></td>
+                <td><input type="text" v-model="item.status === 'COMPLETED' ? 'Завершённая' : 'Незавершённая'"></td>
                 <td><input type="text" v-model="item.created_at"></td>
-                <td>
-                    <button @click="updateItem(item, 'transaction')" type="button" class="btn btn-sm btn-primary mb-1">Сохранить изменения</button>
-                    <button @click="deleteItem(item.id, 'transaction')" type="button" class="btn btn-sm btn-danger">Удалить</button>
-                </td>
+                <td><button @click="deleteItem(item.id, 'transaction')" type="button" class="btn btn-sm btn-danger">Удалить</button></td>
             </tr>
             </tbody>
         </table>
@@ -167,12 +167,11 @@ export default {
         this.users = await this.users.data.users;
     },
     methods: {
-        imageSelected(e, item){
+        imageSelected(e, item) {
             console.log("hello")
             item.image = e.target.files[0].name
             item.imageFile = e.target.files[0]
         },
-
         deleteItem(id, type) {
             switch (type) {
                 case 'transaction':
@@ -189,16 +188,6 @@ export default {
         updateItem(item, type) {
             console.error(item)
             switch (type) {
-                case 'transaction':
-                    axios.patch('/api/transaction',
-                        {
-                            user_id: item.user_id,
-                            product_id: item.product_id,
-                            status: item.status,
-                            created_at: item.created_at,
-                        },
-                        { headers: {Authorization: `Bearer ${this.apiKey}`}})
-                    break;
                 case 'user':
                     axios.patch('/api/user',
                         {id: item.id, login: item.login, email: item.email, password: item.password, isAdmin: item.isAdmin},

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'login' => 'user',
             'email' => 'user@gmail.com',
+            'fio' => 'Иванов Пётр Васильевич',
             'password' => Hash::make('user'),
             'isAdmin' => 0
         ]);
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'login' => 'admin',
             'email' => 'admin@gmail.com',
+            'fio' => 'Вергун Игорь Семёнов',
             'password' => Hash::make('admin'),
             'isAdmin' => 1
         ]);

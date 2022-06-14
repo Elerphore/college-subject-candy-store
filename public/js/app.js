@@ -5318,6 +5318,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         login: "",
         email: "",
         password: "",
+        fio: "",
         isAdmin: false
       }
     };
@@ -5351,6 +5352,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/".concat(route), {
                   login: _this.user.login,
                   email: _this.user.email,
+                  fio: _this.user.fio,
                   password: _this.user.password
                 }).then(function (resp) {
                   localStorage.setItem("api_token", resp.data.access_token);
@@ -29672,7 +29674,7 @@ var render = function() {
     [
       _c("nav-bar", { staticClass: "mb-5" }),
       _vm._v(" "),
-      _c("router-view", { staticClass: "container mb-2" }),
+      _c("router-view", { staticClass: "container mb-5" }),
       _vm._v(" "),
       _c("window-footer", {
         staticClass: "mt-auto",
@@ -29796,7 +29798,31 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _vm._m(0)
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("ФИО")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.user.fio,
+                            expression: "user.fio"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.user.fio },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.user, "fio", $event.target.value)
+                          }
+                        }
+                      })
+                    ])
                   ]
                 : _vm._e(),
               _vm._v(" "),
@@ -29849,18 +29875,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("ФИО")]),
-      _vm._v(" "),
-      _c("input", { staticClass: "form-control", attrs: { type: "text" } })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

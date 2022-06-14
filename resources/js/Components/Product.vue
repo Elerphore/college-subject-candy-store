@@ -6,7 +6,7 @@
                 <h5 class="card-title">{{ item.name }} : {{ item.amount }}</h5>
             </div>
             <div class="card-footer">
-                <button v-if="isAuthorized" @click="createTransaction()" class="btn btn-primary">В корзину</button>
+                <button v-if="isAuthorized" @click="createTransaction()" class="btn btn-primary mb-3">В корзину</button>
                 <button class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="`#product-description-${index}`">Описание</button>
             </div>
         </div>

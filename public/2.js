@@ -149,9 +149,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -283,19 +280,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.error(item);
 
       switch (type) {
-        case 'transaction':
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch('/api/transaction', {
-            user_id: item.user_id,
-            product_id: item.product_id,
-            status: item.status,
-            created_at: item.created_at
-          }, {
-            headers: {
-              Authorization: "Bearer ".concat(this.apiKey)
-            }
-          });
-          break;
-
         case 'user':
           axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch('/api/user', {
             id: item.id,
@@ -1095,18 +1079,31 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: item.status,
-                      expression: "item.status"
+                      value:
+                        item.status === "COMPLETED"
+                          ? "Завершённая"
+                          : "Незавершённая",
+                      expression:
+                        "item.status === 'COMPLETED' ? 'Завершённая' : 'Незавершённая'"
                     }
                   ],
                   attrs: { type: "text" },
-                  domProps: { value: item.status },
+                  domProps: {
+                    value:
+                      item.status === "COMPLETED"
+                        ? "Завершённая"
+                        : "Незавершённая"
+                  },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(item, "status", $event.target.value)
+                      _vm.$set(
+                        item,
+                        "status === 'COMPLETED' ? 'Завершённая' : 'Незавершённая'",
+                        $event.target.value
+                      )
                     }
                   }
                 })
@@ -1136,20 +1133,6 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("td", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-sm btn-primary mb-1",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.updateItem(item, "transaction")
-                      }
-                    }
-                  },
-                  [_vm._v("Сохранить изменения")]
-                ),
-                _vm._v(" "),
                 _c(
                   "button",
                   {
