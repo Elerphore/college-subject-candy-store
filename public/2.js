@@ -149,6 +149,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -783,6 +786,29 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
+                    value: _vm.user.fio,
+                    expression: "user.fio"
+                  }
+                ],
+                attrs: { type: "text" },
+                domProps: { value: _vm.user.fio },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.user, "fio", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
                     value: _vm.user.password,
                     expression: "user.password"
                   }
@@ -906,6 +932,29 @@ var render = function() {
                           return
                         }
                         _vm.$set(item, "email", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: item.fio,
+                        expression: "item.fio"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: item.fio },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(item, "fio", $event.target.value)
                       }
                     }
                   })
@@ -1191,6 +1240,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Логин")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Почта")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ФИО")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Пароль")]),
         _vm._v(" "),
